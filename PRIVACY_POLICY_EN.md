@@ -1,11 +1,8 @@
-# SalaryReco Privacy Policy
+# Salareco Privacy Policy
 
 Last updated: April 27, 2026
 
-This Privacy Policy explains how SalaryReco (the "App") handles user information.
-
-Operator: [Enter developer or business name]  
-Contact: [Enter support email address or contact form URL]
+This Privacy Policy explains how Salareco (the "App") handles user information.
 
 ## 1. Information Handled by the App
 
@@ -124,10 +121,3 @@ The App is not intended to knowingly collect personal information from children 
 ## 14. Changes to This Policy
 
 This Privacy Policy may be updated due to feature additions, legal changes, or changes to services used by the App. If there are material changes, we will notify users in the App or on the public policy page.
-
-## 15. Contact
-
-For questions about this Privacy Policy or how the App handles user information, please contact:
-
-[Enter support email address or contact form URL]
-
