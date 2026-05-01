@@ -1,0 +1,737 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0000000000000000000040 /* PayrollLedgerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000020 /* PayrollLedgerApp.swift */; };
+		AA0000000000000000000041 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000021 /* AppRootView.swift */; };
+		AA0000000000000000000042 /* PayrollAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000022 /* PayrollAppState.swift */; };
+		AA0000000000000000000043 /* PayrollModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000023 /* PayrollModels.swift */; };
+		AA0000000000000000000044 /* Drafts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000024 /* Drafts.swift */; };
+		AA0000000000000000000046 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000026 /* Formatters.swift */; };
+		AA0000000000000000000047 /* SharedViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000027 /* SharedViewComponents.swift */; };
+		AA0000000000000000000048 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000028 /* DashboardView.swift */; };
+		AA0000000000000000000049 /* RecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000029 /* RecordsView.swift */; };
+		AA000000000000000000004A /* RecordEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002A /* RecordEditorView.swift */; };
+		AA000000000000000000004B /* TemplatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002B /* TemplatesView.swift */; };
+		AA000000000000000000004C /* TemplateEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002C /* TemplateEditorView.swift */; };
+		AA000000000000000000004E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002E /* SettingsView.swift */; };
+		AA000000000000000000004F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002F /* Assets.xcassets */; };
+		AA0000000000000000000050 /* PayrollSlipImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000031 /* PayrollSlipImportService.swift */; };
+		AA0000000000000000000051 /* RecordSharePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000032 /* RecordSharePreviewView.swift */; };
+		AA0000000000000000000052 /* LaunchExperienceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000033 /* LaunchExperienceView.swift */; };
+		AA0000000000000000000053 /* PayrollWidgetSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000034 /* PayrollWidgetSupport.swift */; };
+		AA0000000000000000000054 /* PayrollWidgetSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000034 /* PayrollWidgetSupport.swift */; };
+		AA0000000000000000000055 /* PayrollLedgerWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000035 /* PayrollLedgerWidget.swift */; };
+		AA0000000000000000000056 /* PayrollLedgerWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000036 /* PayrollLedgerWidgetBundle.swift */; };
+		AA0000000000000000000057 /* PayrollLedgerWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000039 /* PayrollLedgerWidget.appex */; };
+		AA0000000000000000000070 /* PayrollRecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000071 /* PayrollRecordDetailView.swift */; };
+		AA0000000000000000000072 /* PayrollTemplateSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000073 /* PayrollTemplateSharing.swift */; };
+		AA0000000000000000000074 /* RecordCopyPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000075 /* RecordCopyPickerView.swift */; };
+		AA0000000000000000000076 /* TemplateSharingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000077 /* TemplateSharingViews.swift */; };
+		AA0000000000000000000078 /* PayrollNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000079 /* PayrollNotificationScheduler.swift */; };
+		AA000000000000000000007B /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007C /* Localization.swift */; };
+		AA000000000000000000007D /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007C /* Localization.swift */; };
+		AA0000000000000000000081 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000080 /* Localizable.strings */; };
+		AA0000000000000000000082 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000080 /* Localizable.strings */; };
+		AA0000000000000000000090 /* PayrollMonetization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000091 /* PayrollMonetization.swift */; };
+		AA0000000000000000000092 /* MonetizationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000093 /* MonetizationViews.swift */; };
+		AA0000000000000000000094 /* PayrollCSVExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000095 /* PayrollCSVExporter.swift */; };
+		AA00000000000000000000A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A2 /* InfoPlist.strings */; };
+		AA00000000000000000000A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A5 /* InfoPlist.strings */; };
+		D0B0165D2F9DC961004D2DED /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = D0B0165C2F9DC961004D2DED /* GoogleMobileAds */; };
+		D0B0165F2F9DD127004D2DED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B0165E2F9DD120004D2DED /* AppDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA0000000000000000000065 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA0000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA0000000000000000000064;
+			remoteInfo = PayrollLedgerWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AA0000000000000000000060 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AA0000000000000000000057 /* PayrollLedgerWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AA000000000000000000000A /* PayrollLedger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayrollLedger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000020 /* PayrollLedgerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollLedgerApp.swift; sourceTree = "<group>"; };
+		AA0000000000000000000021 /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000022 /* PayrollAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollAppState.swift; sourceTree = "<group>"; };
+		AA0000000000000000000023 /* PayrollModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollModels.swift; sourceTree = "<group>"; };
+		AA0000000000000000000024 /* Drafts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drafts.swift; sourceTree = "<group>"; };
+		AA0000000000000000000026 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		AA0000000000000000000027 /* SharedViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedViewComponents.swift; sourceTree = "<group>"; };
+		AA0000000000000000000028 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000029 /* RecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsView.swift; sourceTree = "<group>"; };
+		AA000000000000000000002A /* RecordEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordEditorView.swift; sourceTree = "<group>"; };
+		AA000000000000000000002B /* TemplatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesView.swift; sourceTree = "<group>"; };
+		AA000000000000000000002C /* TemplateEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateEditorView.swift; sourceTree = "<group>"; };
+		AA000000000000000000002E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA000000000000000000002F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA0000000000000000000030 /* PayrollLedger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PayrollLedger.entitlements; sourceTree = "<group>"; };
+		AA0000000000000000000031 /* PayrollSlipImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollSlipImportService.swift; sourceTree = "<group>"; };
+		AA0000000000000000000032 /* RecordSharePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSharePreviewView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000033 /* LaunchExperienceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchExperienceView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000034 /* PayrollWidgetSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollWidgetSupport.swift; sourceTree = "<group>"; };
+		AA0000000000000000000035 /* PayrollLedgerWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollLedgerWidget.swift; sourceTree = "<group>"; };
+		AA0000000000000000000036 /* PayrollLedgerWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollLedgerWidgetBundle.swift; sourceTree = "<group>"; };
+		AA0000000000000000000037 /* PayrollLedgerWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PayrollLedgerWidget.entitlements; sourceTree = "<group>"; };
+		AA0000000000000000000038 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA0000000000000000000039 /* PayrollLedgerWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PayrollLedgerWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000071 /* PayrollRecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollRecordDetailView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000073 /* PayrollTemplateSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollTemplateSharing.swift; sourceTree = "<group>"; };
+		AA0000000000000000000075 /* RecordCopyPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCopyPickerView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000077 /* TemplateSharingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateSharingViews.swift; sourceTree = "<group>"; };
+		AA0000000000000000000079 /* PayrollNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollNotificationScheduler.swift; sourceTree = "<group>"; };
+		AA000000000000000000007A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA000000000000000000007C /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		AA0000000000000000000083 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA0000000000000000000084 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ../ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA0000000000000000000091 /* PayrollMonetization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollMonetization.swift; sourceTree = "<group>"; };
+		AA0000000000000000000093 /* MonetizationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonetizationViews.swift; sourceTree = "<group>"; };
+		AA0000000000000000000095 /* PayrollCSVExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayrollCSVExporter.swift; sourceTree = "<group>"; };
+		AA0000000000000000000096 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		AA0000000000000000000097 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		AA00000000000000000000A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA00000000000000000000A4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ../ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA00000000000000000000A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA00000000000000000000A7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D0B0165E2F9DD120004D2DED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA000000000000000000000C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0B0165D2F9DC961004D2DED /* GoogleMobileAds in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000061 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA0000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000098 /* Config */,
+				AA0000000000000000000004 /* PayrollLedger */,
+				AA000000000000000000006A /* PayrollLedgerWidget */,
+				AA0000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000000A /* PayrollLedger.app */,
+				AA0000000000000000000039 /* PayrollLedgerWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000004 /* PayrollLedger */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000005 /* App */,
+				AA0000000000000000000006 /* Models */,
+				AA0000000000000000000007 /* Services */,
+				AA0000000000000000000008 /* Support */,
+				AA0000000000000000000009 /* Views */,
+				AA000000000000000000007A /* Info.plist */,
+				AA0000000000000000000030 /* PayrollLedger.entitlements */,
+				AA000000000000000000002F /* Assets.xcassets */,
+			);
+			path = PayrollLedger;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000005 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000021 /* AppRootView.swift */,
+				D0B0165E2F9DD120004D2DED /* AppDelegate.swift */,
+				AA0000000000000000000033 /* LaunchExperienceView.swift */,
+				AA0000000000000000000022 /* PayrollAppState.swift */,
+				AA0000000000000000000020 /* PayrollLedgerApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000006 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000024 /* Drafts.swift */,
+				AA0000000000000000000023 /* PayrollModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000007 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000031 /* PayrollSlipImportService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000008 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000026 /* Formatters.swift */,
+				AA000000000000000000007C /* Localization.swift */,
+				AA00000000000000000000A2 /* InfoPlist.strings */,
+				AA0000000000000000000095 /* PayrollCSVExporter.swift */,
+				AA0000000000000000000091 /* PayrollMonetization.swift */,
+				AA0000000000000000000079 /* PayrollNotificationScheduler.swift */,
+				AA0000000000000000000080 /* Localizable.strings */,
+				AA0000000000000000000073 /* PayrollTemplateSharing.swift */,
+				AA0000000000000000000034 /* PayrollWidgetSupport.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000009 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000028 /* DashboardView.swift */,
+				AA0000000000000000000093 /* MonetizationViews.swift */,
+				AA0000000000000000000071 /* PayrollRecordDetailView.swift */,
+				AA0000000000000000000075 /* RecordCopyPickerView.swift */,
+				AA000000000000000000002A /* RecordEditorView.swift */,
+				AA0000000000000000000032 /* RecordSharePreviewView.swift */,
+				AA0000000000000000000029 /* RecordsView.swift */,
+				AA0000000000000000000027 /* SharedViewComponents.swift */,
+				AA000000000000000000002E /* SettingsView.swift */,
+				AA0000000000000000000077 /* TemplateSharingViews.swift */,
+				AA000000000000000000002C /* TemplateEditorView.swift */,
+				AA000000000000000000002B /* TemplatesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000006A /* PayrollLedgerWidget */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000035 /* PayrollLedgerWidget.swift */,
+				AA0000000000000000000036 /* PayrollLedgerWidgetBundle.swift */,
+				AA00000000000000000000A5 /* InfoPlist.strings */,
+				AA0000000000000000000038 /* Info.plist */,
+				AA0000000000000000000037 /* PayrollLedgerWidget.entitlements */,
+			);
+			path = PayrollLedgerWidget;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000098 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000096 /* Debug.xcconfig */,
+				AA0000000000000000000097 /* Release.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA000000000000000000000E /* PayrollLedger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000010 /* Build configuration list for PBXNativeTarget "PayrollLedger" */;
+			buildPhases = (
+				AA000000000000000000000B /* Sources */,
+				AA000000000000000000000C /* Frameworks */,
+				AA000000000000000000000D /* Resources */,
+				AA0000000000000000000060 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA0000000000000000000066 /* PBXTargetDependency */,
+			);
+			name = PayrollLedger;
+			productName = PayrollLedger;
+			productReference = AA000000000000000000000A /* PayrollLedger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA0000000000000000000064 /* PayrollLedgerWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000000000000000000069 /* Build configuration list for PBXNativeTarget "PayrollLedgerWidget" */;
+			buildPhases = (
+				AA0000000000000000000063 /* Sources */,
+				AA0000000000000000000061 /* Frameworks */,
+				AA0000000000000000000062 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PayrollLedgerWidget;
+			productName = PayrollLedgerWidget;
+			productReference = AA0000000000000000000039 /* PayrollLedgerWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA0000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2620;
+				TargetAttributes = {
+					AA000000000000000000000E = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					AA0000000000000000000064 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = AA000000000000000000000F /* Build configuration list for PBXProject "PayrollLedger" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ja,
+				Base,
+			);
+			mainGroup = AA0000000000000000000002;
+			packageReferences = (
+				D0B0165B2F9DC961004D2DED /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
+			productRefGroup = AA0000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA000000000000000000000E /* PayrollLedger */,
+				AA0000000000000000000064 /* PayrollLedgerWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA000000000000000000000D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000000000000000000004F /* Assets.xcassets in Resources */,
+				AA00000000000000000000A0 /* InfoPlist.strings in Resources */,
+				AA0000000000000000000081 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000062 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000000000000000000082 /* Localizable.strings in Resources */,
+				AA00000000000000000000A1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA000000000000000000000B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000000000000000000041 /* AppRootView.swift in Sources */,
+				AA0000000000000000000048 /* DashboardView.swift in Sources */,
+				AA0000000000000000000044 /* Drafts.swift in Sources */,
+				AA0000000000000000000046 /* Formatters.swift in Sources */,
+				AA0000000000000000000052 /* LaunchExperienceView.swift in Sources */,
+				AA000000000000000000007B /* Localization.swift in Sources */,
+				AA0000000000000000000092 /* MonetizationViews.swift in Sources */,
+				AA0000000000000000000042 /* PayrollAppState.swift in Sources */,
+				AA0000000000000000000040 /* PayrollLedgerApp.swift in Sources */,
+				AA0000000000000000000043 /* PayrollModels.swift in Sources */,
+				AA0000000000000000000094 /* PayrollCSVExporter.swift in Sources */,
+				AA0000000000000000000090 /* PayrollMonetization.swift in Sources */,
+				AA0000000000000000000050 /* PayrollSlipImportService.swift in Sources */,
+				AA0000000000000000000078 /* PayrollNotificationScheduler.swift in Sources */,
+				AA0000000000000000000070 /* PayrollRecordDetailView.swift in Sources */,
+				AA0000000000000000000074 /* RecordCopyPickerView.swift in Sources */,
+				AA0000000000000000000053 /* PayrollWidgetSupport.swift in Sources */,
+				AA0000000000000000000072 /* PayrollTemplateSharing.swift in Sources */,
+				AA000000000000000000004A /* RecordEditorView.swift in Sources */,
+				AA0000000000000000000051 /* RecordSharePreviewView.swift in Sources */,
+				AA0000000000000000000049 /* RecordsView.swift in Sources */,
+				D0B0165F2F9DD127004D2DED /* AppDelegate.swift in Sources */,
+				AA0000000000000000000047 /* SharedViewComponents.swift in Sources */,
+				AA000000000000000000004E /* SettingsView.swift in Sources */,
+				AA0000000000000000000076 /* TemplateSharingViews.swift in Sources */,
+				AA000000000000000000004C /* TemplateEditorView.swift in Sources */,
+				AA000000000000000000004B /* TemplatesView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA0000000000000000000063 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000000000000000000007D /* Localization.swift in Sources */,
+				AA0000000000000000000056 /* PayrollLedgerWidgetBundle.swift in Sources */,
+				AA0000000000000000000055 /* PayrollLedgerWidget.swift in Sources */,
+				AA0000000000000000000054 /* PayrollWidgetSupport.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA0000000000000000000066 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA0000000000000000000064 /* PayrollLedgerWidget */;
+			targetProxy = AA0000000000000000000065 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AA0000000000000000000080 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA0000000000000000000083 /* en */,
+				AA0000000000000000000084 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		AA00000000000000000000A2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA00000000000000000000A3 /* en */,
+				AA00000000000000000000A4 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AA00000000000000000000A5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA00000000000000000000A6 /* en */,
+				AA00000000000000000000A7 /* ja */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AA0000000000000000000011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000096 /* Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA0000000000000000000012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000097 /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA0000000000000000000013 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000096 /* Debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PayrollLedger/PayrollLedger.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PayrollLedger/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "サラレコ";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_PayrollCloudKitContainerIdentifier = "iCloud.$(PRODUCT_BUNDLE_IDENTIFIER)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PAYROLL_APP_GROUP_IDENTIFIER = group.com.example.PayrollLedger.shared;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PayrollLedger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA0000000000000000000014 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000097 /* Release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PayrollLedger/PayrollLedger.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PayrollLedger/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "サラレコ";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_PayrollCloudKitContainerIdentifier = "iCloud.$(PRODUCT_BUNDLE_IDENTIFIER)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PAYROLL_APP_GROUP_IDENTIFIER = group.com.example.PayrollLedger.shared;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PayrollLedger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AA0000000000000000000067 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000096 /* Debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = PayrollLedgerWidget/PayrollLedgerWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PayrollLedgerWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "サラレコウィジェット";
+				INFOPLIST_KEY_PayrollAppGroupIdentifier = "$(PAYROLL_APP_GROUP_IDENTIFIER)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PAYROLL_APP_GROUP_IDENTIFIER = group.com.example.PayrollLedger.shared;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PayrollLedger.PayrollLedgerWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA0000000000000000000068 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA0000000000000000000097 /* Release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = PayrollLedgerWidget/PayrollLedgerWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PayrollLedgerWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "サラレコウィジェット";
+				INFOPLIST_KEY_PayrollAppGroupIdentifier = "$(PAYROLL_APP_GROUP_IDENTIFIER)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PAYROLL_APP_GROUP_IDENTIFIER = group.com.example.PayrollLedger.shared;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.PayrollLedger.PayrollLedgerWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA000000000000000000000F /* Build configuration list for PBXProject "PayrollLedger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000011 /* Debug */,
+				AA0000000000000000000012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000010 /* Build configuration list for PBXNativeTarget "PayrollLedger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000013 /* Debug */,
+				AA0000000000000000000014 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000000000000000000069 /* Build configuration list for PBXNativeTarget "PayrollLedgerWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA0000000000000000000067 /* Debug */,
+				AA0000000000000000000068 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D0B0165B2F9DC961004D2DED /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D0B0165C2F9DC961004D2DED /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0B0165B2F9DC961004D2DED /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = AA0000000000000000000001 /* Project object */;
+}

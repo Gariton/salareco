@@ -1,0 +1,7 @@
+// Copy this file to Local.xcconfig and fill in local values.
+// Local.xcconfig is ignored by Git.
+
+PAYROLL_DEVELOPMENT_TEAM =
+PAYROLL_RELEASE_ADMOB_APP_ID =
+PAYROLL_RELEASE_ADMOB_BANNER_ID =
+

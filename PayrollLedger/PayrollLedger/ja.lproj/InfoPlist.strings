@@ -1,0 +1,8 @@
+"CFBundleDisplayName" = "サラレコ";
+"NSCameraUsageDescription" = "共有テンプレートのQRコードを読み取るためにカメラを使用します。";
+"NSFaceIDUsageDescription" = "給与データを保護するため、Face ID を使用します。";
+"NSUserTrackingUsageDescription" = "ユーザに関連性の高い広告を表示し、広告の効果測定を行うために、他社のアプリやWebサイトを横断したトラッキングを許可するか確認します。";
+"QUICK_ACTION_CREATE_SALARY_RECORD_TITLE" = "給与を追加";
+"QUICK_ACTION_CREATE_BONUS_RECORD_TITLE" = "賞与を追加";
+"QUICK_ACTION_CREATE_TEMPLATE_TITLE" = "テンプレートを追加";
+"QUICK_ACTION_OPEN_TEMPLATES_TITLE" = "テンプレートを開く";

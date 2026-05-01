@@ -1,0 +1,13 @@
+// Shared Release build settings.
+// Define real App Store values in Local.xcconfig, which is ignored by Git.
+
+PAYROLL_DEVELOPMENT_TEAM =
+PAYROLL_RELEASE_ADMOB_APP_ID =
+PAYROLL_RELEASE_ADMOB_BANNER_ID =
+
+#include? "Local.xcconfig"
+
+DEVELOPMENT_TEAM = $(PAYROLL_DEVELOPMENT_TEAM)
+AdMobAppID = $(PAYROLL_RELEASE_ADMOB_APP_ID)
+BannerID = $(PAYROLL_RELEASE_ADMOB_BANNER_ID)
+

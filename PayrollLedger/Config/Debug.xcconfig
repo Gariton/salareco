@@ -1,0 +1,13 @@
+// Shared Debug build settings.
+// Local overrides are intentionally not committed.
+
+PAYROLL_DEVELOPMENT_TEAM =
+PAYROLL_DEBUG_ADMOB_APP_ID = ca-app-pub-3940256099942544~1458002511
+PAYROLL_DEBUG_ADMOB_BANNER_ID = ca-app-pub-3940256099942544/2435281174
+
+#include? "Local.xcconfig"
+
+DEVELOPMENT_TEAM = $(PAYROLL_DEVELOPMENT_TEAM)
+AdMobAppID = $(PAYROLL_DEBUG_ADMOB_APP_ID)
+BannerID = $(PAYROLL_DEBUG_ADMOB_BANNER_ID)
+

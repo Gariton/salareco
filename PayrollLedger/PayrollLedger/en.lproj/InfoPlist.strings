@@ -1,0 +1,8 @@
+"CFBundleDisplayName" = "Salary Log";
+"NSCameraUsageDescription" = "Camera access is used to scan QR codes for shared templates.";
+"NSFaceIDUsageDescription" = "Face ID is used to protect your payroll data.";
+"NSUserTrackingUsageDescription" = "We ask permission to track activity across other companies' apps and websites to show more relevant ads and measure ad performance.";
+"QUICK_ACTION_CREATE_SALARY_RECORD_TITLE" = "Add Salary";
+"QUICK_ACTION_CREATE_BONUS_RECORD_TITLE" = "Add Bonus";
+"QUICK_ACTION_CREATE_TEMPLATE_TITLE" = "Add Template";
+"QUICK_ACTION_OPEN_TEMPLATES_TITLE" = "Open Templates";
