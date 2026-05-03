@@ -30,7 +30,7 @@ struct PayrollPlusBenefit: Identifiable {
         PayrollPlusBenefit(
             id: "photo-import",
             title: PayrollLocalization.text("給与明細の写真から自動入力"),
-            detail: PayrollLocalization.text("支給項目と控除項目をOCRで読み取り、手入力の手間を減らします。"),
+            detail: PayrollLocalization.text("支給項目と控除項目をAIで読み取り、手入力の手間を減らします。"),
             systemImage: "photo.badge.magnifyingglass"
         ),
         PayrollPlusBenefit(

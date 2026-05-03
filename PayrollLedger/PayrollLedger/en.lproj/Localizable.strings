@@ -194,7 +194,7 @@
 "給与明細の写真から入力" = "Import from payslip photo";
 "写真を選んで自動入力" = "Pick a photo to autofill";
 "明細を解析しています" = "Analyzing payslip";
-"Vision OCR を使って明細写真から支給項目と控除項目を抽出します。保存前に内容を確認してください。" = "Vision OCR extracts payment and deduction items from a payslip photo. Please review the results before saving.";
+"AI読み取りで明細写真から支給項目と控除項目を抽出します。保存前に内容を確認してください。" = "AI reads the payslip photo and extracts payment and deduction items. Please review the results before saving.";
 "適用テンプレート" = "Apply template";
 "選択中の支給元にテンプレートはありません。" = "There are no templates for the selected income source.";
 "記録、分析、共有までを一つの流れに。" = "Keep logging, analysis, and sharing in one smooth flow.";
@@ -260,7 +260,7 @@
 "絞り込みが連動" = "Linked filters";
 "ダッシュボード、記録、テンプレートで同じ支給元に絞れます。" = "Use the same source filter across Dashboard, Records, and Templates.";
 "記録はすばやく入力" = "Log Records Quickly";
-"給与と賞与を分けて管理でき、明細写真から OCR で下書きを作ることもできます。" = "Manage salary and bonuses separately, and create drafts from payslip photos with OCR.";
+"給与と賞与を分けて管理でき、明細写真からAI読み取りで下書きを作ることもできます。" = "Manage salary and bonuses separately, and create drafts from payslip photos with AI reading.";
 "新規記録を追加" = "Add a new record";
 "記録タブ右上の追加ボタンから入力します。" = "Use the add button at the top right of Records.";
 "写真から自動入力" = "Autofill from photo";
@@ -290,7 +290,7 @@
 "テンプレートを無制限に保存" = "Unlimited templates";
 "無料プランは3件まで。毎月の給与、賞与、勤務形態別のひな形を増やせます。" = "The free plan supports up to 3 templates. Add templates for salary, bonuses, and work patterns with Plus.";
 "給与明細の写真から自動入力" = "Autofill from payslip photos";
-"支給項目と控除項目をOCRで読み取り、手入力の手間を減らします。" = "Use OCR to read payment and deduction items and reduce manual entry.";
+"支給項目と控除項目をAIで読み取り、手入力の手間を減らします。" = "Use AI to read payment and deduction items and reduce manual entry.";
 "勤務時間項目を無制限に管理" = "Unlimited work hour items";
 "無料プランは2件まで。時間外、深夜、休日など細かい内訳を残せます。" = "The free plan supports up to 2 items. Track overtime, late-night, holiday, and other details with Plus.";
 "給与記録をCSVで書き出し" = "Export payroll records to CSV";
@@ -433,9 +433,12 @@
 "共有日時" = "Shared at";
 "テンプレート名未入力" = "Template name missing";
 "画像データを読み込めませんでした。" = "Could not load the image data.";
-"写真から文字を認識できませんでした。明細全体が見える画像を選んでください。" = "Could not recognize text from the photo. Choose an image that shows the full payslip.";
-"文字は読めましたが、支給項目や控除項目を抽出できませんでした。" = "Text was recognized, but payment or deduction items could not be extracted.";
-"明細写真から抽出" = "Extracted from payslip photo";
+"OpenAI APIキーが設定されていません。" = "The OpenAI API key is not configured.";
+"AI読み取りに失敗しました。%@" = "AI reading failed. %@";
+"AI読み取り結果を解析できませんでした。" = "Could not parse the AI reading result.";
+"明細写真から支給項目や控除項目を抽出できませんでした。" = "Could not extract payment or deduction items from the payslip photo.";
+"AI読み取りで抽出" = "Extracted with AI reading";
+"OpenAI APIがエラーを返しました。" = "The OpenAI API returned an error.";
 "賞与明細" = "Bonus payslip";
 "ウィジェットの表示を切り替える" = "Toggle widget display";
 "給与ウィジェットの金額と支給元名の表示/マスクを切り替えます。" = "Toggles amount and source name display or masking in the payroll widget.";

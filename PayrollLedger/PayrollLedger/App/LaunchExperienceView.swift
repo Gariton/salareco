@@ -118,7 +118,7 @@ struct OnboardingTourView: View {
             ),
             OnboardingPage(
                 title: PayrollLocalization.text("記録はすばやく入力"),
-                subtitle: PayrollLocalization.text("給与と賞与を分けて管理でき、明細写真から OCR で下書きを作ることもできます。"),
+                subtitle: PayrollLocalization.text("給与と賞与を分けて管理でき、明細写真からAI読み取りで下書きを作ることもできます。"),
                 accent: Color(hex: "#2563EB"),
                 hero: .capture,
                 highlights: [

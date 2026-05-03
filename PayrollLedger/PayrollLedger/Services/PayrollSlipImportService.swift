@@ -1,5 +1,5 @@
 import Foundation
-import Vision
+import UIKit
 
 struct PayrollSlipImportResult {
     var kind: PayrollRecordKind
@@ -12,234 +12,294 @@ struct PayrollSlipImportResult {
 
 enum PayrollSlipImportError: LocalizedError {
     case imageLoadFailed
-    case noTextRecognized
+    case apiKeyMissing
+    case apiRequestFailed(String)
+    case invalidAIResponse
     case noItemsRecognized
 
     var errorDescription: String? {
         switch self {
         case .imageLoadFailed:
             PayrollLocalization.text("画像データを読み込めませんでした。")
-        case .noTextRecognized:
-            PayrollLocalization.text("写真から文字を認識できませんでした。明細全体が見える画像を選んでください。")
+        case .apiKeyMissing:
+            PayrollLocalization.text("OpenAI APIキーが設定されていません。")
+        case .apiRequestFailed(let message):
+            PayrollLocalization.format("AI読み取りに失敗しました。%@", message)
+        case .invalidAIResponse:
+            PayrollLocalization.text("AI読み取り結果を解析できませんでした。")
         case .noItemsRecognized:
-            PayrollLocalization.text("文字は読めましたが、支給項目や控除項目を抽出できませんでした。")
+            PayrollLocalization.text("明細写真から支給項目や控除項目を抽出できませんでした。")
         }
     }
 }
 
 enum PayrollSlipImportService {
+    private static let responseEndpoint = URL(string: "https://api.openai.com/v1/responses")!
+    private static let imageMaxDimension: CGFloat = 2048
+    private static let jpegCompressionQuality: CGFloat = 0.88
+
     static func importRecordDraft(
         from imageData: Data,
         fallbackKind: PayrollRecordKind,
         sourceID: UUID?
     ) async throws -> PayrollSlipImportResult {
-        let recognizedText = try recognizeText(from: imageData)
-        return try parseRecognizedText(recognizedText, fallbackKind: fallbackKind, sourceID: sourceID)
-    }
-
-    private static func recognizeText(from imageData: Data) throws -> String {
-        let request = VNRecognizeTextRequest()
-        request.recognitionLevel = .accurate
-        request.recognitionLanguages = ["ja-JP", "en-US"]
-        request.usesLanguageCorrection = true
-
-        let handler = VNImageRequestHandler(data: imageData, options: [:])
-        try handler.perform([request])
-
-        let observations = (request.results ?? [])
-            .sorted {
-                if abs($0.boundingBox.midY - $1.boundingBox.midY) > 0.02 {
-                    return $0.boundingBox.midY > $1.boundingBox.midY
-                }
-
-                return $0.boundingBox.minX < $1.boundingBox.minX
-            }
-
-        let lines = observations.compactMap { observation in
-            observation.topCandidates(1).first?.string
+        guard let apiKey = OpenAIConfiguration.apiKey else {
+            throw PayrollSlipImportError.apiKeyMissing
         }
 
-        let text = lines.joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines)
+        let jpegData = try prepareJPEGData(from: imageData)
+        let extraction = try await extractPayrollSlip(
+            from: jpegData,
+            apiKey: apiKey,
+            fallbackKind: fallbackKind
+        )
 
-        guard !text.isEmpty else {
-            throw PayrollSlipImportError.noTextRecognized
-        }
-
-        return text
-    }
-
-    private static func parseRecognizedText(
-        _ text: String,
-        fallbackKind: PayrollRecordKind,
-        sourceID: UUID?
-    ) throws -> PayrollSlipImportResult {
-        let lines = text
-            .components(separatedBy: .newlines)
-            .map(normalize)
-            .filter { !$0.isEmpty }
-
-        let detectedKind = detectRecordKind(in: text, fallbackKind: fallbackKind)
-        let paymentDate = detectPaymentDate(in: text) ?? .now
-
-        let categorizedItems = extractLineItems(from: lines)
-
-        guard !categorizedItems.payments.isEmpty else {
-            throw PayrollSlipImportError.noItemsRecognized
-        }
-
-        let notePrefix = PayrollLocalization.text("明細写真から抽出")
-        let note = lines.contains(where: { $0.contains("賞与") })
-            ? PayrollLocalization.format("%1$@ / %2$@", notePrefix, PayrollLocalization.text("賞与明細"))
-            : notePrefix
-
-        return PayrollSlipImportResult(
-            kind: detectedKind,
-            paymentDate: paymentDate,
-            sourceID: sourceID,
-            note: note,
-            paymentItems: categorizedItems.payments,
-            deductionItems: categorizedItems.deductions
+        return try makeImportResult(
+            from: extraction,
+            fallbackKind: fallbackKind,
+            sourceID: sourceID
         )
     }
 
-    private static func detectRecordKind(in text: String, fallbackKind: PayrollRecordKind) -> PayrollRecordKind {
-        let normalized = normalize(text)
-        if normalized.contains("賞与") || normalized.localizedCaseInsensitiveContains("bonus") {
-            return .bonus
+    private static func extractPayrollSlip(
+        from imageData: Data,
+        apiKey: String,
+        fallbackKind: PayrollRecordKind
+    ) async throws -> AIImportPayload {
+        var request = URLRequest(url: responseEndpoint)
+        request.httpMethod = "POST"
+        request.timeoutInterval = 45
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.httpBody = try makeRequestBody(imageData: imageData, fallbackKind: fallbackKind)
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw PayrollSlipImportError.invalidAIResponse
         }
 
-        return fallbackKind
-    }
-
-    private static func detectPaymentDate(in text: String) -> Date? {
-        guard let detector = try? NSDataDetector(
-            types: NSTextCheckingResult.CheckingType.date.rawValue
-        ) else {
-            return nil
+        guard (200..<300).contains(httpResponse.statusCode) else {
+            throw PayrollSlipImportError.apiRequestFailed(errorMessage(from: data))
         }
 
-        return detector.matches(
-            in: text,
-            range: NSRange(text.startIndex..., in: text)
-        ).compactMap(\.date).first
+        let apiResponse = try JSONDecoder().decode(OpenAIResponse.self, from: data)
+        if let error = apiResponse.error {
+            throw PayrollSlipImportError.apiRequestFailed(error.message ?? PayrollLocalization.text("OpenAI APIがエラーを返しました。"))
+        }
+
+        guard let outputText = apiResponse.outputText?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !outputText.isEmpty,
+              let payloadData = jsonObjectData(from: outputText) else {
+            throw PayrollSlipImportError.invalidAIResponse
+        }
+
+        do {
+            return try JSONDecoder().decode(AIImportPayload.self, from: payloadData)
+        } catch {
+            throw PayrollSlipImportError.invalidAIResponse
+        }
     }
 
-    private static func extractLineItems(from lines: [String]) -> (payments: [EditableLineItem], deductions: [EditableLineItem]) {
-        var currentSection: PayrollLineItemCategory?
-        var paymentItems: [EditableLineItem] = []
-        var deductionItems: [EditableLineItem] = []
+    private static func makeImportResult(
+        from payload: AIImportPayload,
+        fallbackKind: PayrollRecordKind,
+        sourceID: UUID?
+    ) throws -> PayrollSlipImportResult {
+        let paymentItems = sanitizedLineItems(payload.paymentItems)
+        let deductionItems = sanitizedLineItems(payload.deductionItems)
+
+        guard !paymentItems.isEmpty else {
+            throw PayrollSlipImportError.noItemsRecognized
+        }
+
+        let notePrefix = PayrollLocalization.text("AI読み取りで抽出")
+        let supplementalNote = payload.note?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let note: String
+        if let supplementalNote = supplementalNote, !supplementalNote.isEmpty {
+            note = PayrollLocalization.format("%1$@ / %2$@", notePrefix, supplementalNote)
+        } else {
+            note = notePrefix
+        }
+
+        return PayrollSlipImportResult(
+            kind: payload.kindValue ?? fallbackKind,
+            paymentDate: parsePaymentDate(payload.paymentDate) ?? .now,
+            sourceID: sourceID,
+            note: note,
+            paymentItems: paymentItems,
+            deductionItems: deductionItems
+        )
+    }
+
+    private static func makeRequestBody(
+        imageData: Data,
+        fallbackKind: PayrollRecordKind
+    ) throws -> Data {
+        let imageURL = "data:image/jpeg;base64,\(imageData.base64EncodedString())"
+        let requestObject: [String: Any] = [
+            "model": OpenAIConfiguration.model,
+            "store": false,
+            "max_output_tokens": 1600,
+            "input": [
+                [
+                    "role": "user",
+                    "content": [
+                        [
+                            "type": "input_text",
+                            "text": importPrompt(fallbackKind: fallbackKind)
+                        ],
+                        [
+                            "type": "input_image",
+                            "image_url": imageURL,
+                            "detail": "high"
+                        ]
+                    ]
+                ]
+            ],
+            "text": [
+                "format": responseFormatSchema
+            ]
+        ]
+
+        return try JSONSerialization.data(withJSONObject: requestObject)
+    }
+
+    private static func importPrompt(fallbackKind: PayrollRecordKind) -> String {
+        """
+        日本の給与明細または賞与明細の写真を読み取り、支給項目と控除項目を抽出してください。
+        返答は必ず指定されたJSONスキーマに従ってください。
+
+        抽出ルール:
+        - kind は給与明細なら salary、賞与明細なら bonus。不明な場合は \(fallbackKind.rawValue)。
+        - payment_date は支給日を YYYY-MM-DD 形式で返してください。不明な場合は null。
+        - payment_items は支給欄の個別項目です。基本給、手当、通勤費、残業手当、賞与などを含めます。
+        - deduction_items は控除欄の個別項目です。健康保険、厚生年金、雇用保険、所得税、住民税などを含めます。
+        - amount は円単位の数値だけにしてください。カンマ、円記号、マイナス記号は含めません。
+        - 合計、総支給額、控除合計、差引支給額、手取り、振込額、課税対象額、累計、勤務日数、勤務時間は個別項目に含めません。
+        - 読み取れない項目や金額に自信がない項目は配列に入れないでください。
+        - note は「賞与明細」「給与明細」など、利用者の確認に役立つ短い日本語だけを返してください。不明な場合は null。
+        """
+    }
+
+    private static var responseFormatSchema: [String: Any] {
+        [
+            "type": "json_schema",
+            "name": "payroll_slip_import",
+            "strict": true,
+            "schema": [
+                "type": "object",
+                "additionalProperties": false,
+                "properties": [
+                    "kind": [
+                        "type": "string",
+                        "enum": ["salary", "bonus"]
+                    ],
+                    "payment_date": [
+                        "type": ["string", "null"],
+                        "description": "支給日。YYYY-MM-DD。不明な場合は null。"
+                    ],
+                    "note": [
+                        "type": ["string", "null"],
+                        "description": "短い補足。不明な場合は null。"
+                    ],
+                    "payment_items": [
+                        "type": "array",
+                        "items": lineItemSchema
+                    ],
+                    "deduction_items": [
+                        "type": "array",
+                        "items": lineItemSchema
+                    ]
+                ],
+                "required": [
+                    "kind",
+                    "payment_date",
+                    "note",
+                    "payment_items",
+                    "deduction_items"
+                ]
+            ]
+        ]
+    }
+
+    private static var lineItemSchema: [String: Any] {
+        [
+            "type": "object",
+            "additionalProperties": false,
+            "properties": [
+                "name": [
+                    "type": "string",
+                    "description": "明細上の項目名。"
+                ],
+                "amount": [
+                    "type": "number",
+                    "description": "円単位の金額。"
+                ]
+            ],
+            "required": ["name", "amount"]
+        ]
+    }
+
+    private static func prepareJPEGData(from imageData: Data) throws -> Data {
+        guard let image = UIImage(data: imageData) else {
+            throw PayrollSlipImportError.imageLoadFailed
+        }
+
+        let longestSide = max(image.size.width, image.size.height)
+        let scaleRatio = min(1, imageMaxDimension / max(longestSide, 1))
+        let targetSize = CGSize(
+            width: max(1, image.size.width * scaleRatio),
+            height: max(1, image.size.height * scaleRatio)
+        )
+
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        format.opaque = true
+
+        let renderer = UIGraphicsImageRenderer(size: targetSize, format: format)
+        let normalizedImage = renderer.image { context in
+            UIColor.white.setFill()
+            context.fill(CGRect(origin: .zero, size: targetSize))
+            image.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+
+        guard let jpegData = normalizedImage.jpegData(compressionQuality: jpegCompressionQuality) else {
+            throw PayrollSlipImportError.imageLoadFailed
+        }
+
+        return jpegData
+    }
+
+    private static func sanitizedLineItems(_ items: [AIImportLineItem]) -> [EditableLineItem] {
         var seenKeys = Set<String>()
 
-        for line in lines {
-            if containsAny(in: line, keywords: ["支給明細", "支給項目", "支給内訳"]) {
-                currentSection = .payment
-                continue
+        return items.compactMap { item in
+            let name = normalize(item.name)
+            let amount = item.amount.rounded()
+            guard !name.isEmpty, amount > 0 else {
+                return nil
             }
 
-            if containsAny(in: line, keywords: ["控除明細", "控除項目", "控除内訳"]) {
-                currentSection = .deduction
-                continue
-            }
-
-            if containsAny(in: line, keywords: [
-                "総支給",
-                "支給合計",
-                "控除合計",
-                "差引支給額",
-                "差引",
-                "手取り",
-                "合計"
-            ]) {
-                continue
-            }
-
-            guard let amount = extractAmount(from: line) else {
-                continue
-            }
-
-            let label = cleanLabel(from: line)
-            guard !label.isEmpty else {
-                continue
-            }
-
-            let category = inferCategory(for: label, currentSection: currentSection)
-            guard let category else {
-                continue
-            }
-
-            let dedupeKey = "\(category.rawValue)|\(label)"
+            let dedupeKey = "\(name)|\(Int(amount))"
             guard seenKeys.insert(dedupeKey).inserted else {
-                continue
+                return nil
             }
 
-            let item = EditableLineItem(name: label, amount: amount)
-            switch category {
-            case .payment:
-                paymentItems.append(item)
-            case .deduction:
-                deductionItems.append(item)
-            }
+            return EditableLineItem(name: name, amount: amount)
         }
-
-        return (paymentItems, deductionItems)
     }
 
-    private static func inferCategory(
-        for label: String,
-        currentSection: PayrollLineItemCategory?
-    ) -> PayrollLineItemCategory? {
-        if containsAny(in: label, keywords: [
-            "健康保険",
-            "介護保険",
-            "厚生年金",
-            "雇用保険",
-            "所得税",
-            "住民税",
-            "源泉",
-            "社会保険",
-            "控除",
-            "組合費"
-        ]) {
-            return .deduction
-        }
-
-        if containsAny(in: label, keywords: [
-            "基本給",
-            "給与",
-            "賞与",
-            "手当",
-            "通勤",
-            "住宅",
-            "残業",
-            "役職",
-            "非課税",
-            "課税",
-            "報酬"
-        ]) {
-            return .payment
-        }
-
-        return currentSection
-    }
-
-    private static func extractAmount(from line: String) -> Double? {
-        let pattern = #"(?<!\d)(\d{1,3}(?:,\d{3})+|\d{3,})(?:円)?(?!\d)"#
-        guard let match = firstMatch(for: pattern, in: line), match.count >= 2 else {
+    private static func parsePaymentDate(_ text: String?) -> Date? {
+        guard let text = text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !text.isEmpty else {
             return nil
         }
 
-        return Double(match[1].replacingOccurrences(of: ",", with: ""))
-    }
-
-    private static func cleanLabel(from line: String) -> String {
-        let amountPattern = #"(?<!\d)(\d{1,3}(?:,\d{3})+|\d{3,})(?:円)?(?!\d)"#
-        var label = replacingFirstMatch(for: amountPattern, in: line, with: "")
-        label = replacingFirstMatch(for: #"(20\d{2}|19\d{2})\D{0,3}(1[0-2]|0?[1-9])\D{0,3}(?:[0-3]?\d)?\D*"#, in: label, with: "")
-        label = label.replacingOccurrences(of: "¥", with: "")
-        label = label.replacingOccurrences(of: "円", with: "")
-        label = label.replacingOccurrences(of: ":", with: "")
-        label = label.replacingOccurrences(of: "：", with: "")
-        return label.trimmingCharacters(in: .whitespacesAndNewlines)
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.date(from: text)
     }
 
     private static func normalize(_ text: String) -> String {
@@ -250,39 +310,127 @@ enum PayrollSlipImportService {
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private static func containsAny(in text: String, keywords: [String]) -> Bool {
-        keywords.contains { text.contains($0) }
-    }
+    private static func jsonObjectData(from text: String) -> Data? {
+        if let data = text.data(using: .utf8),
+           (try? JSONSerialization.jsonObject(with: data)) != nil {
+            return data
+        }
 
-    private static func firstMatch(for pattern: String, in text: String) -> [String]? {
-        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+        guard let start = text.firstIndex(of: "{"),
+              let end = text.lastIndex(of: "}") else {
             return nil
         }
 
-        let range = NSRange(text.startIndex..., in: text)
-        guard let match = regex.firstMatch(in: text, range: range) else {
-            return nil
-        }
-
-        return (0..<match.numberOfRanges).compactMap { index in
-            guard let range = Range(match.range(at: index), in: text) else {
-                return nil
-            }
-
-            return String(text[range])
-        }
+        let jsonText = String(text[start...end])
+        return jsonText.data(using: .utf8)
     }
 
-    private static func replacingFirstMatch(
-        for pattern: String,
-        in text: String,
-        with replacement: String
-    ) -> String {
-        guard let regex = try? NSRegularExpression(pattern: pattern) else {
+    private static func errorMessage(from data: Data) -> String {
+        if let errorResponse = try? JSONDecoder().decode(OpenAIErrorResponse.self, from: data),
+           let message = errorResponse.error.message?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !message.isEmpty {
+            return message
+        }
+
+        if let text = String(data: data, encoding: .utf8),
+           !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return text
         }
 
-        let range = NSRange(text.startIndex..., in: text)
-        return regex.stringByReplacingMatches(in: text, options: [], range: range, withTemplate: replacement)
+        return PayrollLocalization.text("OpenAI APIがエラーを返しました。")
     }
+}
+
+private enum OpenAIConfiguration {
+    static var apiKey: String? {
+        guard let value = value(for: "apiKey") else {
+            return nil
+        }
+
+        return value
+    }
+
+    static var model: String {
+        value(for: "model") ?? "gpt-5.4-nano"
+    }
+
+    private static func value(for key: String) -> String? {
+        guard
+            let configuration = Bundle.main.object(forInfoDictionaryKey: "OpenAIConfiguration") as? [String: String],
+            let value = configuration[key]?.trimmingCharacters(in: .whitespacesAndNewlines),
+            !value.isEmpty,
+            !value.hasPrefix("$(")
+        else {
+            return nil
+        }
+
+        return value
+    }
+}
+
+private struct AIImportPayload: Decodable {
+    let kind: String
+    let paymentDate: String?
+    let note: String?
+    let paymentItems: [AIImportLineItem]
+    let deductionItems: [AIImportLineItem]
+
+    var kindValue: PayrollRecordKind? {
+        PayrollRecordKind(rawValue: kind)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case kind
+        case paymentDate = "payment_date"
+        case note
+        case paymentItems = "payment_items"
+        case deductionItems = "deduction_items"
+    }
+}
+
+private struct AIImportLineItem: Decodable {
+    let name: String
+    let amount: Double
+}
+
+private struct OpenAIResponse: Decodable {
+    let output: [OutputItem]?
+    let topLevelOutputText: String?
+    let error: OpenAIError?
+
+    enum CodingKeys: String, CodingKey {
+        case output
+        case topLevelOutputText = "output_text"
+        case error
+    }
+
+    var outputText: String? {
+        if let topLevelOutputText, !topLevelOutputText.isEmpty {
+            return topLevelOutputText
+        }
+
+        let text = output?
+            .flatMap { $0.content ?? [] }
+            .compactMap(\.text)
+            .joined(separator: "\n")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        return text?.isEmpty == false ? text : nil
+    }
+
+    struct OutputItem: Decodable {
+        let content: [OutputContent]?
+    }
+
+    struct OutputContent: Decodable {
+        let text: String?
+    }
+}
+
+private struct OpenAIErrorResponse: Decodable {
+    let error: OpenAIError
+}
+
+private struct OpenAIError: Decodable {
+    let message: String?
 }

@@ -1,6 +1,6 @@
 # Salareco Privacy Policy
 
-Last updated: April 27, 2026
+Last updated: May 3, 2026
 
 This Privacy Policy explains how Salareco (the "App") handles user information.
 
@@ -28,7 +28,7 @@ The App uses or processes information for the following purposes:
 - Syncing data between devices signed in with the same Apple ID using iCloud
 - Displaying salary records in Home Screen widgets
 - Sending local notifications for salary payment days, salary announcement days, and related reminders
-- Assisting data entry by recognizing text from images selected by the user
+- Assisting data entry by sending selected images to the OpenAI API for AI reading
 - Exporting CSV files and sharing templates or salary records
 - Verifying and restoring in-app purchases and providing Plus features
 - Displaying ads in the free plan, measuring ad performance, and preventing fraud
@@ -44,7 +44,9 @@ If iCloud is not available, the App falls back to local storage on the device.
 
 ## 4. Photo Import
 
-The App's photo import feature reads only images that the user explicitly selects from the photo library. Text recognition is performed on the device, and the App does not send the image itself to the App operator's server.
+The App's photo import feature reads only images that the user explicitly selects from the photo library. Selected images are sent to the OpenAI API so AI can read payment items, deduction items, amounts, and similar details. The App operator does not store the image itself on its own server for the photo import feature.
+
+Data sent to the OpenAI API is handled according to OpenAI's terms, privacy policy, and data control documentation. If you do not want unnecessary personal or sensitive information in a payslip image to be sent, do not use the photo import feature.
 
 Payment items, deduction items, amounts, and other data extracted from the photo are stored as salary record data on the device or in iCloud only if the user saves the record.
 
@@ -96,6 +98,7 @@ The App operator does not sell or provide users' salary records or other persona
 However, user information may be processed by third-party services in the following cases:
 
 - Storage and sync through iCloud/CloudKit
+- Image analysis for photo import through the OpenAI API
 - Ad delivery through Google AdMob
 - In-app purchases through Apple StoreKit
 - When the user sends information to third parties using sharing features, CSV export, the operating system's share sheet, or similar functions

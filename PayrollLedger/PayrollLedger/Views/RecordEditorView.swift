@@ -230,7 +230,7 @@ struct RecordEditorView: View {
                     ProgressView("明細を解析しています")
                 }
 
-                Text("Vision OCR を使って明細写真から支給項目と控除項目を抽出します。保存前に内容を確認してください。")
+                Text("AI読み取りで明細写真から支給項目と控除項目を抽出します。保存前に内容を確認してください。")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             } else {

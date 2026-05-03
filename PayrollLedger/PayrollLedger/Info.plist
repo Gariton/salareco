@@ -212,6 +212,13 @@
       <key>banner</key>
       <string>$(BannerID)</string>
     </dict>
+	<key>OpenAIConfiguration</key>
+	<dict>
+		<key>apiKey</key>
+		<string>$(OpenAIAPIKey)</string>
+		<key>model</key>
+		<string>$(OpenAIModel)</string>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
